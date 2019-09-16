@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+system:
+  config:
+    # 七牛云配置
+    qiNiuUrlPrefix: your account info
+    qiNiuMediaPath: your account info
+    qiNiuAccessKey: your account info
+    qiNiuSecretKey: your account info
+    qiNiuBucket: your account info
+
+    # fastDFS文件服务器配置
+    fileServerUrl: http://192.168.182.99
+
