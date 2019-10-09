@@ -1,4 +1,4 @@
-package com.nolookblog.common.utils;
+package com.nolookblog.common.imageupload;
 
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
@@ -12,10 +12,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageClient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,12 +29,12 @@ import java.util.UUID;
  * @author Mrrrrr10
  * @github https://github.com/Mrrrrr10
  * @blog https://nolookblog.com/
- * @description
+ * @description 图片上传到七牛云、本地、文件服务器
  */
 
 @RestController
 @RequestMapping("/common")
-public class UploadController {
+public class ImageUploadController {
 
 	@Value("${system.config.qiNiuUrlPrefix}")
 	private String qiNiuUrlPrefix;

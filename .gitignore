@@ -4,3 +4,5 @@ target
 .classpath
 .project
 .settings
+application_prod.yaml
+*.jpg
