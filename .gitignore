@@ -6,3 +6,4 @@ target
 .settings
 application_prod.yaml
 *.jpg
+test
