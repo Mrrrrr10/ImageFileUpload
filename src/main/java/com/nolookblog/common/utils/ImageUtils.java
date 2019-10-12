@@ -1,5 +1,6 @@
 package com.nolookblog.common.utils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,7 +20,9 @@ public class ImageUtils {
 	private static String path = System.getProperty("user.dir");
 
 	static {
-		file = new File(path + "\\src\\main\\resources");
+		file = new File(path + File.separator + "src" + File.separator
+				+ "main" + File.separator + "resources");
+		System.out.println(path);
 		if (!file.exists()) {
 			file.mkdir();
 		}
@@ -30,12 +33,11 @@ public class ImageUtils {
 	 *
 	 * @param urlString 被下载的文件地址
 	 * @param fileName  本地文件名
-	 * @throws Exception 各种异常
 	 */
 	public static void downloadWithoutCookie(String urlString, String fileName) {
 		InputStream inputStream = null;
 		try (
-				OutputStream fos = new FileOutputStream(file.getPath() + "\\"
+				OutputStream fos = new FileOutputStream(file.getPath() + File.separator
 						+ fileName);
 				BufferedOutputStream bos = new BufferedOutputStream(fos)
 		) {
@@ -79,14 +81,13 @@ public class ImageUtils {
 	 *
 	 * @param urlString 被下载的文件地址
 	 * @param fileName  本地文件名
-	 * @throws Exception 各种异常
 	 */
 	public static void downloadWithCookie(String urlString, String fileName) {
 		String cookie = null;
 		InputStream inputStream = null;
 
 		try (
-				FileOutputStream fos = new FileOutputStream(file.getPath() + "\\" + fileName)
+				FileOutputStream fos = new FileOutputStream(file.getPath() + File.separator + fileName)
 		)
 
 		{
