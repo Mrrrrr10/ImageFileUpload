@@ -78,5 +78,59 @@ public class CustomerDateUtils extends DateUtils {
 		return list;
 	}
 
+	/**
+	 * 秒转换为日期时间
+	 *
+	 * @param seconds
+	 * @return
+	 */
+	public static Date seconds2Date(Integer seconds) {
+		return seconds == null ? new Date() : new Date(seconds * MILLIS_PER_SECOND);
+	}
+
+	/**
+	 * 时间戳转换为日期时间
+	 *
+	 * @param millis
+	 * @return
+	 */
+	public static Date millis2Date(Long millis) {
+		return millis == null ? new Date() : new Date(millis);
+	}
+
+	/**
+	 * 日期时间转换为时间戳
+	 *
+	 * @param date
+	 * @return
+	 */
+	public static long date2Millis(Date date) {
+		return date.getTime();
+	}
+
+
+//	/**
+//	 * 获取过去的天数
+//	 *
+//	 * @param date
+//	 * @return
+//	 */
+//	public static long pastDays(Date date) {
+//		long t = System.currentTimeMillis() - date.getTime();
+//		return t / (24 * 60 * 60 * 1000);
+//	}
+
+//	/**
+//	 * 获取两个日期之间的天数
+//	 *
+//	 * @param before
+//	 * @param after
+//	 * @return
+//	 */
+//	public static double getDistanceOfTwoDate(Date before, Date after) {
+//		long beforeTime = before.getTime();
+//		long afterTime = after.getTime();
+//		return (afterTime - beforeTime) / (1000 * 60 * 60 * 24);
+//	}
 
 }
