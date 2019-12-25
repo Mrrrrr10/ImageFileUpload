@@ -1,4 +1,4 @@
-package com.nolookblog.common.imageupload;
+package com.nolookblog.controller;
 
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;

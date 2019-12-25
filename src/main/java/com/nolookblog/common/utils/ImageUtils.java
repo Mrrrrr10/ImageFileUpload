@@ -1,8 +1,6 @@
 package com.nolookblog.common.utils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 

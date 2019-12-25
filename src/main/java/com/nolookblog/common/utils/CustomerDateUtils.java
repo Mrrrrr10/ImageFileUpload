@@ -1,8 +1,11 @@
 package com.nolookblog.common.utils;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,7 +23,7 @@ public class CustomerDateUtils extends DateUtils {
 	/**
 	 * 日期格式
 	 */
-	public static String[] parsePatterns = {
+	public static final String[] DATETIME_PATTERNS = {
 			"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
 			"yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
 			"yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"
@@ -41,12 +44,12 @@ public class CustomerDateUtils extends DateUtils {
 	}
 
 	/**
-	 * 获取当天的0点时间
+	 * 获取当天的0点时间字符串
 	 *
 	 * @param date
 	 * @return
 	 */
-	public static String getTodayZeroDatetime(Date date) {
+	public static String getTodayZeroDatetimeString(Date date) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		Calendar calendar = Calendar.getInstance();
@@ -60,13 +63,43 @@ public class CustomerDateUtils extends DateUtils {
 	}
 
 	/**
+	 * 获取当天的0点时间日期时间
+	 *
+	 * @return
+	 */
+	public static Date getTodayZeroDatetime() {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		return cal.getTime();
+	}
+
+	/**
+	 * 获取昨天的23:59:59日期时间
+	 *
+	 * @return
+	 */
+	public static Date getYesterdayEndDatetime() {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		return new Date(cal.getTime().getTime() - 1);
+	}
+
+	/**
 	 * 获取起止日期之间的日期
 	 *
 	 * @param startDate
 	 * @param endDate
 	 * @return
 	 */
-	public static List<Date> getWithinDateList(Date startDate, Date endDate) {
+	public static List<Date> getWithinDateTimeList(Date startDate, Date endDate) {
 		List<Date> list = new ArrayList<>();
 
 		long length = (endDate.getTime() - startDate.getTime()) / MILLIS_PER_DAY;
@@ -106,6 +139,86 @@ public class CustomerDateUtils extends DateUtils {
 	 */
 	public static long date2Millis(Date date) {
 		return date.getTime();
+	}
+
+	/**
+	 * 获取本周周一日期字符串
+	 *
+	 * @return
+	 */
+	public static String getMondayOfThisWeek() {
+		Calendar c = Calendar.getInstance();
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+		if (dayOfWeek == 0) {
+			dayOfWeek = 7;
+		}
+		c.add(Calendar.DATE, -dayOfWeek + 1);
+
+		return DateFormatUtils.format(c, DATETIME_PATTERNS[0]);
+	}
+
+	/**
+	 * 获取本周周日日期字符串
+	 *
+	 * @return
+	 */
+	public static String getSundayOfThisWeek() {
+		Calendar c = Calendar.getInstance();
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+		if (dayOfWeek == 0) {
+			dayOfWeek = 7;
+		}
+		c.add(Calendar.DATE, -dayOfWeek + 7);
+
+		return DateFormatUtils.format(c, DATETIME_PATTERNS[0]);
+	}
+
+	/**
+	 * 获取本周周五日期字符串
+	 *
+	 * @return yyyy-MM-dd
+	 */
+	public static String getFridayOfThisWeek() {
+		Calendar c = Calendar.getInstance();
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+		if (dayOfWeek == 0) {
+			dayOfWeek = 7;
+		}
+		c.add(Calendar.DATE, -dayOfWeek + 5);
+
+		return DateFormatUtils.format(c, DATETIME_PATTERNS[0]);
+	}
+
+	/**
+	 * 获取上周周一日期字符串
+	 *
+	 * @param date
+	 * @return
+	 */
+	public static String getMondayOfLastWeek(Date date) {
+		Date a = DateUtils.addDays(date, -1);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(a);
+		// 一周
+		cal.add(Calendar.WEEK_OF_YEAR, -1);
+		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+
+		return DateFormatUtils.format(cal, DATETIME_PATTERNS[0]);
+	}
+
+	/**
+	 * 获取上周周日日期字符串
+	 *
+	 * @param date
+	 * @return
+	 */
+	public static String getSundayOfLastWeek(Date date) {
+		Date a = DateUtils.addDays(date, -1);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(a);
+		cal.set(Calendar.DAY_OF_WEEK, 1);
+
+		return DateFormatUtils.format(cal, DATETIME_PATTERNS[0]);
 	}
 
 
